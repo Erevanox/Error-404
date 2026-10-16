@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* TraceX Clean Light Professional Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Subtle radar pulse */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pulse-radar {
+  animation: pulse-ring 2.5s infinite ease-in-out;
+}
+
+/* React Flow Light Theme SOC Styles */
+.react-flow__pane {
+  background-color: #F8FAFC !important;
+}
+.react-flow__controls {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+.react-flow__controls-button {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  color: #64748B !important;
+  fill: #64748B !important;
+}
+.react-flow__controls-button:hover {
+  background: #F1F5F9 !important;
+  color: #10B981 !important;
+  fill: #10B981 !important;
+}
+.react-flow__minimap {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
