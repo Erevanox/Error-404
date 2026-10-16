@@ -1,14 +1,14 @@
-# EventLens – Cybersecurity Incident Correlation & Visualization System
+# TraceX – Cybersecurity Incident Correlation & Visualization System
 
-> **Tagline:** *"EventLens — Evidence First. Human Guided. Defensive by Design."*
+> **Tagline:** *"TraceX — Evidence First. Human Guided. Defensive by Design."*
 
-EventLens is a modern, defensive Security Operations Center (SOC) intelligence and incident correlation platform. It synthesizes multi-source authentication, host process, and network telemetry to identify suspicious activity, correlate related events into explainable incident dossiers, and empower human analysts with epistemic clarity and automated visualization.
+TraceX is a modern, defensive Security Operations Center (SOC) intelligence and incident correlation platform. It synthesizes multi-source authentication, host process, and network telemetry to identify suspicious activity, correlate related events into explainable incident dossiers, and empower human analysts with epistemic clarity and automated visualization.
 
 ---
 
 ## 🛡️ Core Philosophy: Defensive by Design & Epistemic Modesty
 
-EventLens adheres strictly to defensive blue-team principles:
+TraceX adheres strictly to defensive blue-team principles:
 1. **Preserve Raw Forensic Truth:** Every normalized event retains its verbatim, unmodified raw log string for legal and forensic chain-of-custody.
 2. **Epistemic Modesty:** Correlation rules and risk scores generate **working investigative hypotheses**, never absolute proof of hostile intent. Legitimate administrative tasks, DevOps automation, and network glitches frequently mimic malicious activity.
 3. **Simulated Response Actions:** All containment playbooks (host quarantine, session token revocation, null-route IP blocking) operate in **safe sandbox mode**, producing verified simulation audits without making destructive changes to live networks.
@@ -137,29 +137,45 @@ The application includes the canonical hackathon demonstration scenario:
 
 ### Prerequisites
 - Node.js (v18+)
-- Python (3.10+) with `uv`
+- Python (3.10+)
+
+### First-time setup
+
+Install the backend dependencies:
+```cmd
+pip install -r backend\requirements.txt
+```
+
+Install the frontend dependencies (once):
+```cmd
+cd frontend
+npm install
+cd ..
+```
 
 ### Running the Application
 
-You can start both servers with the included batch file:
-```cmd
-start_eventlens.bat
-```
+Double-click **`TraceX.bat`** in the repository root. It starts the FastAPI backend on
+port 8001, waits for it to bind, then starts the Vite dev server on port 5174 and opens
+the dashboard in your default browser.
 
-Or start them manually in two terminals:
+Or start the two servers manually in two terminals:
 
-#### Terminal 1: Backend
+#### Terminal 1: Backend (port 8001)
 ```powershell
-cd "c:\antigravity\trace x\backend"
-uv run uvicorn main:app --host 127.0.0.1 --port 8000
+cd backend
+python -m uvicorn main:app --host 127.0.0.1 --port 8001
 ```
 
-#### Terminal 2: Frontend
+#### Terminal 2: Frontend (port 5174)
 ```powershell
-cd "c:\antigravity\trace x\frontend"
-node .\node_modules\vite\bin\vite.js --port 5173
+cd frontend
+npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
-- **Frontend SOC Dashboard:** `http://localhost:5173/`
-- **Backend API & Health:** `http://127.0.0.1:8000/api/health`
-- **Swagger Documentation:** `http://127.0.0.1:8000/docs`
+- **Frontend SOC Dashboard:** `http://localhost:5174/`
+- **Backend API & Health:** `http://127.0.0.1:8001/api/health`
+- **Swagger Documentation:** `http://127.0.0.1:8001/docs`
+
+The frontend dev server proxies `/api` to `127.0.0.1:8001` (see `frontend/vite.config.js`),
+so the backend port must stay in sync with that proxy target.
